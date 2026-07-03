@@ -2,6 +2,13 @@
 
 Aplicação fullstack de gestão de tarefas em estilo Kanban (colunas "A fazer" / "Em progresso" / "Concluído"), com drag-and-drop, prioridades e prazos.
 
+## Demo
+
+- **Aplicação:** https://todo-app-scss.vercel.app
+- **API:** https://todoappscss-backend.onrender.com
+
+> O backend está hospedado no plano gratuito do Render, que hiberna após 15 minutos de inatividade. A primeira requisição depois de um tempo parado pode levar até ~1 minuto para responder enquanto o serviço "acorda" — isso é esperado, não é bug. O banco Postgres gratuito também tem prazo de expiração (ver seção Deploy).
+
 ## Stack
 
 **Backend**
@@ -172,3 +179,34 @@ Os testes usam o mesmo banco Postgres configurado na `DATABASE_URL` — não é 
 | `npm test` | Roda os testes automatizados |
 | `npm run db:generate` | Gera uma nova migration a partir do schema |
 | `npm run db:migrate` | Aplica migrations pendentes no banco |
+
+## Deploy
+
+O projeto está publicado usando três serviços gratuitos:
+
+| Camada | Serviço | Observação |
+|---|---|---|
+| Frontend | [Vercel](https://todo-app-scss.vercel.app) | Build estático do Vite, deploy automático a cada push |
+| Backend | [Render](https://todoappscss-backend.onrender.com) (Web Service, via Docker) | Plano free hiberna após 15 min de inatividade |
+
+### Variáveis de ambiente em produção
+
+**Backend (Render):**
+```
+DATABASE_URL = <Internal Database URL do Postgres criado no Render>
+```
+(`PORT` não precisa ser definida — o Render injeta automaticamente)
+
+**Frontend (Vercel):**
+```
+VITE_API_URL = <URL pública do backend no Render>
+```
+
+> Variáveis `VITE_*` são embutidas no bundle **no momento do build**. Se a variável for alterada depois do primeiro deploy, é necessário fazer um redeploy manual para que o novo valor seja aplicado.
+
+### Recriando o deploy do zero
+
+1. Criar um banco PostgreSQL no Render (plano Free) e copiar a *Internal Database URL*
+2. Criar um Web Service no Render apontando para a pasta `backend/` do repositório, runtime Docker, com a `DATABASE_URL` configurada
+3. Criar um projeto no Vercel apontando para a pasta `frontend/` do repositório, com `VITE_API_URL` configurada com a URL pública do backend
+4. As migrations do banco rodam automaticamente no boot do container do backend (ver `CMD` no `backend/Dockerfile`)
