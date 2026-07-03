@@ -1,0 +1,58 @@
+@use "../../styles/variables" as *;
+
+.task-board {
+  display: flex;
+  gap: $spacing-md;
+  align-items: flex-start;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  &__column {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: $radius;
+    padding: $spacing-sm;
+    min-width: 0;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
+    &--over {
+      background: rgba(245, 130, 31, 0.1);
+      outline: 2px dashed $color-primary;
+    }
+  }
+
+  &__column-title {
+    font-size: 1rem;
+    margin: 0 0 $spacing-sm;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  &__count {
+    font-size: 0.75rem;
+    background: $color-border;
+    border-radius: 999px;
+    padding: 1px 8px;
+    color: $color-text-muted;
+  }
+
+  &__column-body {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    min-height: 60px;
+  }
+
+  &__empty {
+    color: $color-text-muted;
+    font-size: 0.85rem;
+    text-align: center;
+    padding: $spacing-md 0;
+  }
+}

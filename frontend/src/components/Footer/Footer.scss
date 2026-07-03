@@ -1,0 +1,14 @@
+@use "../../styles/variables" as *;
+
+.footer {
+  padding: $spacing-md $spacing-lg;
+  background: $color-border;
+  border-top: 1px solid darken($color-border, 5%);
+  text-align: center;
+  margin-top: $spacing-lg;
+
+  &__text {
+    color: $color-text-muted;
+    font-size: 0.85rem;
+  }
+}

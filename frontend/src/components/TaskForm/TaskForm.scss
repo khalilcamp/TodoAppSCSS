@@ -1,0 +1,68 @@
+@use "../../styles/variables" as *;
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  margin-bottom: $spacing-lg;
+
+  input,
+  textarea {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    padding: $spacing-sm;
+    color: $color-text;
+    font-family: inherit;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $color-primary;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 60px;
+  }
+
+  &__error {
+    color: $color-danger;
+    margin: 0;
+  }
+
+  button {
+    background: $color-primary;
+    color: white;
+    border: none;
+    border-radius: $radius;
+    padding: $spacing-sm $spacing-md;
+    font-size: 1rem;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  &__row {
+  display: flex;
+  gap: $spacing-sm;
+
+  select,
+  input[type="date"] {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    padding: $spacing-sm;
+    color: $color-text;
+    font-family: inherit;
+  }
+}
+}

@@ -1,0 +1,61 @@
+@use "./styles/variables" as *;
+
+.app {
+  margin: 0;
+  font-family: $font-family;
+  color: $color-text;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  h1 {
+    margin: 0;
+  }
+
+  &__content {
+    flex: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: $spacing-lg;
+  }
+
+  &__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-lg;
+    gap: $spacing-sm;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__new-task {
+    background: $color-brand-gradient;
+    color: white;
+    border: none;
+    border-radius: $radius;
+    padding: $spacing-sm $spacing-md;
+    font-size: 0.95rem;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  &__status {
+    color: $color-text-muted;
+  }
+
+  &__error {
+    color: $color-danger;
+  }
+}
